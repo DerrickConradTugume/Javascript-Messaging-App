@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HELLO FRIEND</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+    <link rel="stylesheet" href="app.min.css">
+    <style>
+        /* TODO */
+    </style>
+</head>
+
+<body>
+    <div class="app-page" data-page="home">
+        <div class="app-topbar">
+            <!--<div class="app-title">Send Quick Text Message</div>-->
+            <div class="app-title">DEAR FRIEND</div>
+        </div>
+        <div class="app-content">
+            <img src="Images/dearfriend.png" style="width:100%;" />
+            <br />
+            <i>
+                Missing your friend, no need to worry.
+                Send quick text message to your dear friend and catch up with him / her.
+            </i>
+            <br />
+            <br />
+            <div class="app-button" data-target="page3">Send Message</div>
+            <br /><br />
+            <div class="app-button" data-target="page4">About Me</div>
+        </div>
+    </div>
+
+    <div class="app-page" data-page="page3">
+        <div class="app-topbar">
+            <div class="app-button left" data-back data-autotitle></div>
+            <div class="app-title">Send Message</div>
+        </div>
+        <div class="app-content">
+            <small><i><div id="messageLiteral"></div></i></small>
+
+            <br />
+            <br />
+            Your Friend's Phone Number:
+            <br />
+            <br />
+            <input class="app-input" id="phoneNumberBox">
+            <br />
+            <textarea class="app-input" placeholder="Type your message here..." id="messageBox"></textarea>
+            <!--<div class="app-button" data-target="page3">Send Message Now</div>-->
+            <script>
+                function sendMessage() {
+                    var message = "";
+                    var phone = phoneNumberBox.value;
+                    var msg = messageBox.value;
+                    document.getElementById("messageLiteral").innerHTML = "Message Sent. We shall deliver the message to " + phone + " in less than a minute.";
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function () {
+                        if (xhttp.readyState == 4 && xhttp.status == 200) {
+                            document.getElementById("messageLiteral").innerHTML = xhttp.responseText;
+                        }
+                    };
+                    xhttp.open("GET", "http://kernelapi-001-site1.ctempurl.com/Research/API.aspx?phone=" + phone + "&&message=" + msg + "", true);
+                    xhttp.send();
+                    //return message;
+                }
+                function Reset() {
+                    messageBox.value = "";
+                    phoneNumberBox.value = "";
+                    return "";
+                }
+
+            </script>
+            <div class="app-button" onclick="sendMessage()">Send Message Now</div>
+            <br />
+            <div class="app-button" onclick="document.getElementById('messageLiteral').innerHTML = Reset()">Reset</div>
+            <br />
+            <div class="app-button" data-target="page4">About Me</div>
+            <br />
+            <img src="Images/2016100614360637921.jpg" style="width:100%;" />
+        </div>
+
+    </div>
+
+    <div class="app-page" data-page="page4">
+        <div class="app-topbar">
+            <div class="app-button left" data-back data-autotitle></div>
+            <div class="app-title">About Me</div>
+        </div>
+        <div class="app-content">
+            <img src="Images/31955sd3cb35v6k.gif" style="width:100%;" />
+            Name: Tugume Derrick Conrad<br />
+            <!--Student Number: 13 / U / 14328 / PS<br />
+            Student Number: 213012490<br />-->
+            Resgistration Number: 13 / U / 14328 / PS<br />
+            Email: <a href="mailto:tugumeconrad@gmail.com">tugumeconrad@gmail.com</a>
+            <img src="Images/Wwalczyszyn-Android-Style-Honeycomb-Messages.ico" style="width:100%;" />
+        </div>
+
+    </div>
+
+    <script src="zepto.js"></script>
+    <script src="app.min.js"></script>
+    <script>
+        App.controller('home', function (page) {
+            // put stuff here
+        });
+
+        App.controller('page2', function (page) {
+            // put stuff here
+        });
+
+        try {
+            App.restore();
+        } catch (err) {
+            App.load('home');
+        }
+
+    </script>
+</body>
+</html>
